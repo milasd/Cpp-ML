@@ -3,9 +3,9 @@ version: '3'
 vars:
   CXX: g++
   CXXFLAGS: -std=c++17 -Wall -Wextra -O2
-  INCLUDES: -Iinclude
+  INCLUDES: -Icpp_ml/include
   BUILD_DIR: build
-  SRC_DIR: src
+  SRC_DIR: cpp_ml/src
 
 tasks:
   clean:
@@ -42,14 +42,14 @@ tasks:
     desc: Format all C++ code with clang-format
     cmds:
       - find {{.SRC_DIR}} -name "*.cc" -o -name "*.h" | xargs clang-format -i
-      - find include -name "*.h" | xargs clang-format -i
+      - find cpp_ml/include -name "*.h" | xargs clang-format -i
       - find demos -name "*.cc" | xargs clang-format -i
 
   format:check:
     desc: Check if code is properly formatted
     cmds:
       - find {{.SRC_DIR}} -name "*.cc" -o -name "*.h" | xargs clang-format --dry-run --Werror
-      - find include -name "*.h" | xargs clang-format --dry-run --Werror
+      - find cpp_ml/include -name "*.h" | xargs clang-format --dry-run --Werror
       - find demos -name "*.cc" | xargs clang-format --dry-run --Werror
 
   default:

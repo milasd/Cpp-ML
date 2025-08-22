@@ -22,6 +22,8 @@ Build and run the K-NN example:
 task demo:knn
 ```
 
+## Development
+
 Clean build artifacts:
 ```bash
 task clean

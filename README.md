@@ -2,15 +2,16 @@
 
 Machine Learning algorithms from scratch in C++. Does not include Deep Learning.
 
-```
-data/               # Sample datasets
-demos/              # Usage examples
-include/            # Header files
-src/
-├── supervised/     # Supervised learning algorithms
-├── unsupervised/   # Unsupervised learning algorithms  
-└── utils/          # Common methods, such as distance calculation etc.
-tests/              # Unit tests
+```bash
+cpp_ml/                 # ML algorithms codebase
+    ├── src/
+    │   ├── supervised/     # Supervised learning algorithms
+    │   ├── unsupervised/   # Unsupervised learning algorithms  
+    │   └── utils/          # Common functions (eg.: distance calculation etc.)
+    ├── include/            # Header files
+    └── tests/              # Unit tests
+data/                   # Sample datasets
+demos/                  # Usage examples
 ```
 
 ## Run examples
@@ -21,6 +22,11 @@ Build and run the K-NN example:
 ```bash
 task demo:knn
 ```
+
+
+## Development
+
+There are multiple task commands for development; check full list with `task --list`. Some of the most used ones are listed in this section.
 
 Clean build artifacts:
 ```bash

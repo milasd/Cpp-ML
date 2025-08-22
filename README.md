@@ -23,7 +23,6 @@ Build and run the K-NN example:
 task demo:knn
 ```
 
-
 ## Development
 
 There are multiple task commands for development; check full list with `task --list`. Some of the most used ones are listed in this section.

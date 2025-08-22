@@ -1,0 +1,56 @@
+version: '3'
+
+vars:
+  CXX: g++
+  CXXFLAGS: -std=c++17 -Wall -Wextra -O2
+  INCLUDES: -Iinclude
+  BUILD_DIR: build
+  SRC_DIR: src
+
+tasks:
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - rm -rf {{.BUILD_DIR}}
+
+  setup:
+    desc: Create build directory
+    cmds:
+      - mkdir -p {{.BUILD_DIR}}
+
+  build:knn:
+    desc: Build KNN demo
+    deps: [setup]
+    cmds:
+      - "{{.CXX}} {{.CXXFLAGS}} {{.INCLUDES}} {{.SRC_DIR}}/supervised/knn.cc {{.SRC_DIR}}/utils/math_utils.cc demos/knn.cc -o {{.BUILD_DIR}}/knn"
+
+  run:knn:
+    desc: Run KNN demo
+    deps: [build:knn]
+    cmds:
+      - ./{{.BUILD_DIR}}/knn
+
+  demo:knn:
+    desc: Build and run KNN demo
+    deps: [build:knn, run:knn]
+
+  all:
+    desc: Build all demos
+    deps: [build:knn]
+
+  format:
+    desc: Format all C++ code with clang-format
+    cmds:
+      - find {{.SRC_DIR}} -name "*.cc" -o -name "*.h" | xargs clang-format -i
+      - find include -name "*.h" | xargs clang-format -i
+      - find demos -name "*.cc" | xargs clang-format -i
+
+  format:check:
+    desc: Check if code is properly formatted
+    cmds:
+      - find {{.SRC_DIR}} -name "*.cc" -o -name "*.h" | xargs clang-format --dry-run --Werror
+      - find include -name "*.h" | xargs clang-format --dry-run --Werror
+      - find demos -name "*.cc" | xargs clang-format --dry-run --Werror
+
+  default:
+    deps: [demo:knn]
